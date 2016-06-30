@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+	<persistence-unit name="camel" transaction-type="RESOURCE_LOCAL">
+		<class>jammazwan.xzj.City</class>
+		<properties>
+			<property name="openjpa.ConnectionDriverName" value="org.apache.derby.jdbc.EmbeddedDriver" />
+			<property name="openjpa.ConnectionURL" value="jdbc:derby:memory:orders;create=true" />
+			<property name="openjpa.ConnectionUserName" value="" />
+			<property name="openjpa.ConnectionPassword" value="" />
+			<property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema" />
+			<property name="openjpa.Multithreaded" value="true" />
+		</properties>
+	</persistence-unit>
+</persistence>
