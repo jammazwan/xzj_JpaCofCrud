@@ -15,20 +15,34 @@ public class XzjTest extends CamelSpringTestSupport {
 
 	@Test
 	public void testXzjWithMultiple() throws Exception {
-		Thread.sleep(5000);// to give time for csv import
-		consumer.receive(
-				"jpa:jammazwan.entity.City?consumer.nativeQuery=select * from City&consumeDelete=false&joinTransaction=false");
+		Exchange exchange = consumer.receive(
+				"jpa://jammazwan.xzj.City?consumer.nativeQuery=select * from City&consumeDelete=false&joinTransaction=false");
+		// "jpa:jammazwan.xzj.City?consumer.query=select o from
+		// jammazwan.xzj.City o where
+		// o.rank=1&consumeDelete=false&joinTransaction=false");
+		Object[] cities = (Object[]) exchange.getIn().getBody();
+		if (null != cities && cities[0] != null) {
+			System.err.println("CITIES NOT NULL YEAH "+ cities.length + " "+ cities[0].toString());
+			
+		} else {
+			System.err.println("CITIES NULL");
+		}
 	}
 
 	@Test
 	public void testXzjWithSingle() throws Exception {
 		City city = new City(22, "ATX", "USA", 111, 111, 11);
 		Object myobj = template.requestBody("jpa:jammazwan.entity.City", city);
-		Thread.sleep(500); // extra time, should not be needed
 		Exchange exchange = (Exchange) consumer.receive(
-				"jpa://jammazwan.entity.City?consumer.nativeQuery=select * from City&consumeDelete=false&joinTransaction=false");
-		city = exchange.getIn().getBody(City.class);
-		System.err.println("\n\nCITY IS " + city);
+				"jpa://jammazwan.xzj.City?consumer.nativeQuery=select * from City&consumeDelete=false&joinTransaction=false");
+		System.err.println(exchange.getIn().getBody());
+		Object[] cities = (Object[]) exchange.getIn().getBody();
+		if (null != cities && cities[0] != null) {
+			System.err.println("CITIES NOT NULL YEAH "+ cities.length + " "+ cities[1].toString());
+			
+		} else {
+			System.err.println("CITIES NULL");
+		}
 	}
 
 }
