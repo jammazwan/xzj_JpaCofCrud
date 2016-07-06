@@ -29,7 +29,7 @@ public class XzjTest extends CamelSpringTestSupport {
 		Object myobj = template.requestBody("jpa:jammazwan.entity.City", city);
 		Thread.sleep(500); // extra time, should not be needed
 		Exchange exchange = (Exchange) consumer
-				.receive("jpa:jammazwan.entity.City?consumer.nativeQuery=select * from city&consumeDelete=false");
+				.receive("jpa:jammazwan.entity.City?consumer.nativeQuery=select * from City&consumeDelete=false");
 		city = exchange.getIn().getBody(City.class);
 		System.err.println("\n\nCITY IS " + city);
 	}
