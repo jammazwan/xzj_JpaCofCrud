@@ -8,7 +8,7 @@ public class XzjRoutes extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-//		from("file://src/main/resources/data/?noop=true&idempotent=true&fileName=city.csv")
-//		.unmarshal(new BindyCsvDataFormat(City.class)).transacted().split(body()).to("jpa:jammazwan.entity.City").end();
+		from("file://src/main/resources/data/?noop=true&idempotent=true&fileName=city.csv")
+		.unmarshal(new BindyCsvDataFormat(City.class)).split(body()).to("jpa:jammazwan.entity.City").end();
 }
 }
